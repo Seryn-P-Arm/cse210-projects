@@ -30,7 +30,8 @@ class Program
 
         // Iterate through the videos' details and display them
         foreach (var video in videos)
-        {
+        {   
+            Console.WriteLine();
             Console.WriteLine($"Title: {video.GetTitle()}");
             Console.WriteLine($"Author: {video.GetAuthor()}");
             Console.WriteLine($"Length: {video.GetLength()} seconds");
