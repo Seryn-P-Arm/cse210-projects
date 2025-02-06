@@ -1,4 +1,4 @@
-// I added to the breaking activity an animation that will happen as you breathe in and out, it goes faster in and slower out.
+// I added to the breathing activity an animation that will happen as you breathe in and out, it goes faster in and slower out.
 
 using System;
 
