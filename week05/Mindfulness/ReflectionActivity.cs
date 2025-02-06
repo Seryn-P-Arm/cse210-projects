@@ -47,8 +47,6 @@ public class ReflectionActivity : Activity{
         Console.ReadLine();
         Console.Clear();
 
-        char[] spinnerChars = GetSpinnerChars();
-
         int elapsedTime = 0;
         while (elapsedTime < _duration)
         {

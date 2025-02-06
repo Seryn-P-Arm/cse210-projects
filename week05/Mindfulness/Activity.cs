@@ -39,20 +39,37 @@ public abstract class Activity
 
     protected void ShowSpinner(int seconds)
     {
-        char[] spinnerChars = GetSpinnerChars();
-        int totalFrames = seconds * 4; // 4 frames per second
-
-        for (int i = 0; i < totalFrames; i++)
+        List<string> animationStrings = new List<string>
         {
-            Console.Write(spinnerChars[i % spinnerChars.Length]); // Write new character
+            "|",
+            "/",
+            "-",
+            "\\",
+            "|",
+            "/",
+            "-",
+            "\\",
+            "|"
+        };
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(3);
+
+        int i = 0;
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write(animationStrings[i]); // Print spinner
             Thread.Sleep(250);
             Console.Write("\b \b");
-        }
-    }
 
-    protected char[] GetSpinnerChars()
-    {
-        return new char[] { '/', '-', '\\', '|', '/', '-', '\\', '|' };
+            i++;
+
+            if (i >= animationStrings.Count)
+            {
+                i = 0;
+            }
+        }
     }
 
     protected void ShowCountdown(int seconds)
