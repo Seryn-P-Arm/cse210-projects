@@ -10,12 +10,12 @@ class Program
         {
             // Menu options
             Console.Clear();
-            Console.WriteLine("Mindfulness Programm");
-            Console.WriteLine("1. Breathing Activity");
-            Console.WriteLine("2. Reflection Activity");
-            Console.WriteLine("3. Listing Activity");
-            Console.WriteLine("4. Quit");
-            Console.Write("Choose an option: ");
+            Console.WriteLine("Menu Options:");
+            Console.WriteLine("  1. Breathing Activity");
+            Console.WriteLine("  2. Reflection Activity");
+            Console.WriteLine("  3. Listing Activity");
+            Console.WriteLine("  4. Quit");
+            Console.Write("Select a choice from the menu: ");
 
             // End program if user quits
             string choice = Console.ReadLine();
@@ -29,7 +29,7 @@ class Program
                 "3" => new ListingActivity(),
                 _ => null
             };
-            
+
             activity?.Start();
         }
     }

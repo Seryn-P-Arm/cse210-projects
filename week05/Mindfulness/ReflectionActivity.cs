@@ -36,15 +36,29 @@ public class ReflectionActivity : Activity{
     protected override void Run()
     {
         Random random = new Random();
-        Console.WriteLine(_prompts[random.Next(_prompts.Count)]);
-        ShowSpinner(3);
+        Console.WriteLine();
+        Console.WriteLine("Consider the following prompt:");
+        Console.Write(" --- ");
+        Console.Write(_prompts[random.Next(_prompts.Count)]);
+        Console.WriteLine(" --- ");
+
+        // Prompt user to press Enter to continue when ready
+        Console.Write("\nPonder on each of the following questions as they relate to this experience, then press Enter when you are ready to proceed...");
+        Console.ReadLine();
+        Console.Clear();
+
+        char[] spinnerChars = GetSpinnerChars();
 
         int elapsedTime = 0;
         while (elapsedTime < _duration)
         {
-            Console.WriteLine(_questions[random.Next(_questions.Count)]);
-            ShowSpinner(5);
-            elapsedTime += 5;
+            string question = _questions[random.Next(_questions.Count)];
+            Console.Write(" > " + question + " ");
+
+            ShowSpinner(6);
+
+            elapsedTime += 6;
+            Console.WriteLine();
         }
     }
 }

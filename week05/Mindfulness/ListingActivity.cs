@@ -24,8 +24,16 @@ public class ListingActivity : Activity
     // Run activity and random prompt for user, add responses to an empty list then display number of total listed items
     protected override void Run()
     {
+        Console.WriteLine();
+        Console.WriteLine("List as many responses you can to the following prompts:");
+        Console.WriteLine();
+
         Random random = new Random();
-        Console.WriteLine(_prompts[random.Next(_prompts.Count)]);
+        Console.Write(" --- ");
+        Console.Write(_prompts[random.Next(_prompts.Count)]);
+        Console.WriteLine(" --- ");
+        Console.WriteLine();
+        Console.Write("You may begin in: ");
         ShowCountdown(5);
 
         List<string> _responses = new List<string>();
@@ -33,7 +41,7 @@ public class ListingActivity : Activity
 
         while (elapsedTime < _duration)
         {
-            Console.Write("Enter an item: ");
+            Console.Write("> ");
             _responses.Add(Console.ReadLine());
             elapsedTime += 3;
         }

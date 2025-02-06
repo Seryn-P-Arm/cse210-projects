@@ -13,8 +13,10 @@ public abstract class Activity
     {
         Console.Clear();
         Console.WriteLine($"{_name} Activity");
+        Console.WriteLine();
         Console.WriteLine(_description);
-        Console.Write("Enter the duration in seconds: ");
+        Console.WriteLine();
+        Console.Write("Enter how long you would like your session (in seconds): ");
         while (!int.TryParse(Console.ReadLine(), out _duration) || _duration <= 0)
         {
             Console.Write("Invalid input. Enter a positive number: ");
@@ -37,20 +39,29 @@ public abstract class Activity
 
     protected void ShowSpinner(int seconds)
     {
-        for (int i = 0; i < seconds; i++)
+        char[] spinnerChars = GetSpinnerChars();
+        int totalFrames = seconds * 4; // 4 frames per second
+
+        for (int i = 0; i < totalFrames; i++)
         {
-            Console.WriteLine(".");
-            Thread.Sleep(1000);
+            Console.Write(spinnerChars[i % spinnerChars.Length]); // Write new character
+            Thread.Sleep(250);
+            Console.Write("\b \b");
         }
-        Console.WriteLine();
+    }
+
+    protected char[] GetSpinnerChars()
+    {
+        return new char[] { '/', '-', '\\', '|', '/', '-', '\\', '|' };
     }
 
     protected void ShowCountdown(int seconds)
     {
         for (int i = seconds; i > 0; i--)
         {
-            Console.Write($"{i} ");
-            Thread.Sleep(1000);
+            Console.Write(i); // Display countdown number
+            Thread.Sleep(1000); // Wait 1 second
+            Console.Write("\b \b");
         }
         Console.WriteLine();
     }
