@@ -18,7 +18,6 @@ public class ReflectionActivity : Activity{
         "Have you ever done anything like this before?",
         "How did you get started?",
         "How did you feel when it was complete?",
-        "What did you learn about yourself through this experience?",
         "What made this time different than other times when you were not as successful?",
         "What is your favorite thing about this experience?",
         "What could you learn from this experience that applies to other situations?",
