@@ -7,8 +7,8 @@ using System.Text.Json.Serialization;
 // Goal Manager
 public class GoalManager
 {
-    private List<Goal> Goals = new List<Goal>();
-    private int Score = 0;
+    private List<Goal> _goals = new List<Goal>();
+    private int _score = 0;
 
     public void Start()
     {
@@ -17,7 +17,7 @@ public class GoalManager
         {
             Console.Clear();
             Console.WriteLine("=== Eternal Quest System ===");
-            Console.WriteLine($"Score: {Score}\n");
+            Console.WriteLine($"Score: {_score}\n");
             Console.WriteLine("1. Create Goal");
             Console.WriteLine("2. Record Event");
             Console.WriteLine("3. List Goals");
@@ -54,14 +54,14 @@ public class GoalManager
 
         switch (type)
         {
-            case "1": Goals.Add(new SimpleGoal(name, desc, points)); break;
-            case "2": Goals.Add(new EternalGoal(name, desc, points)); break;
+            case "1": _goals.Add(new SimpleGoal(name, desc, points)); break;
+            case "2": _goals.Add(new EternalGoal(name, desc, points)); break;
             case "3":
                 Console.Write("> Target: ");
                 int target = int.Parse(Console.ReadLine());
                 Console.Write("> Bonus: ");
                 int bonus = int.Parse(Console.ReadLine());
-                Goals.Add(new ChecklistGoal(name, desc, points, target, bonus));
+                _goals.Add(new ChecklistGoal(name, desc, points, target, bonus));
                 break;
             default: Console.WriteLine("Invalid selection."); return;
         }
@@ -74,9 +74,9 @@ public class GoalManager
         Console.Clear();
         ListGoals(false);
         Console.Write("\n> Select goal to record: ");
-        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= Goals.Count)
+        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= _goals.Count)
         {
-            Goals[index - 1].RecordEvent(ref Score);
+            _goals[index - 1].RecordEvent(ref _score);
             Console.WriteLine("Event recorded! Press Enter to continue...");
         }
         else
@@ -89,8 +89,8 @@ public class GoalManager
     private void ListGoals(bool pause = true)
     {
         Console.Clear();
-        if (Goals.Count == 0) Console.WriteLine("No goals available.");
-        else for (int i = 0; i < Goals.Count; i++) Console.WriteLine($"[{i + 1}] {Goals[i].GetDetails()}");
+        if (_goals.Count == 0) Console.WriteLine("No goals available.");
+        else for (int i = 0; i < _goals.Count; i++) Console.WriteLine($"[{i + 1}] {_goals[i].GetDetails()}");
         if (pause) { Console.WriteLine("\nPress Enter to return to the menu..."); Console.ReadLine(); }
     }
 
@@ -98,8 +98,8 @@ public class GoalManager
     {
         using (StreamWriter file = new StreamWriter("goals.txt"))
         {
-            file.WriteLine(Score);
-            foreach (Goal goal in Goals) file.WriteLine(goal.SaveFormat());
+            file.WriteLine(_score);
+            foreach (Goal goal in _goals) file.WriteLine(goal.SaveFormat());
         }
         Console.WriteLine("Goals saved successfully! Press Enter to continue...");
         Console.ReadLine();
@@ -109,8 +109,8 @@ public class GoalManager
     {
         if (!File.Exists("goals.txt")) return;
         string[] lines = File.ReadAllLines("goals.txt");
-        Score = int.Parse(lines[0]);
-        Goals.Clear();
+        _score = int.Parse(lines[0]);
+        _goals.Clear();
         Console.WriteLine("Goals loaded successfully! Press Enter to continue...");
         Console.ReadLine();
     }
