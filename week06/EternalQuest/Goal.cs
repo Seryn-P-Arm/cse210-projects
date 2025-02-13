@@ -23,4 +23,5 @@ public abstract class Goal
     public abstract void RecordEvent(ref int score);
     public abstract string GetDetails();
     public abstract string SaveFormat();
+    public void SetCompleted(bool completed) => _isCompleted = completed;
 }
