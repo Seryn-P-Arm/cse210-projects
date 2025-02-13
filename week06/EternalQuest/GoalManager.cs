@@ -94,31 +94,52 @@ public class GoalManager
     private void ListGoals(bool pause = true)
     {
         Console.Clear();
-        if (_goals.Count == 0) Console.WriteLine("No goals available.");
-        else for (int i = 0; i < _goals.Count; i++) Console.WriteLine($"[{i + 1}] {_goals[i].GetDetails()}");
-        if (pause) { Console.WriteLine("\nPress Enter to return to the menu..."); Console.ReadLine(); }
+        Console.WriteLine("=== Goal List ===");
+        Console.WriteLine($"Score: {_score}\n"); // Display the score at the top
+
+        if (_goals.Count == 0)
+        {
+            Console.WriteLine("No goals available.");
+        }
+        else
+        {
+            for (int i = 0; i < _goals.Count; i++)
+            {
+                Console.WriteLine($"[{i + 1}] {_goals[i].GetDetails()}");
+            }
+        }
+
+        if (pause)
+        {
+            Console.WriteLine("\nPress Enter to return to the menu...");
+            Console.ReadLine();
+        }
     }
+
 
     // Save goals to file
     private void SaveGoals()
     {
         using (StreamWriter file = new StreamWriter("goals.txt"))
         {
-            file.WriteLine(_score);
-            foreach (Goal goal in _goals) file.WriteLine(goal.SaveFormat());
+            file.WriteLine(_score); // Save score first
+            foreach (Goal goal in _goals)
+            {
+                file.WriteLine(goal.SaveFormat()); // Save each goal's details
+            }
         }
-        Console.WriteLine("Goals saved successfully! Press Enter to continue...");
+        Console.WriteLine("Goals and score saved successfully! Press Enter to continue...");
         Console.ReadLine();
     }
 
     // Load goals from file
     private void LoadGoals()
     {
-         if (!File.Exists("goals.txt")) return;
+        if (!File.Exists("goals.txt")) return;
 
         string[] lines = File.ReadAllLines("goals.txt");
         _goals.Clear(); // Clear existing goals before loading new ones
-        _score = int.Parse(lines[0]);
+        _score = int.Parse(lines[0]); // Load the score from the first line
 
         for (int i = 1; i < lines.Length; i++)
         {
@@ -128,7 +149,6 @@ public class GoalManager
             string description = parts[2];
             int points = int.Parse(parts[3]);
 
-            // Switch between cases of goal types
             switch (type)
             {
                 case "Simple":
@@ -151,8 +171,7 @@ public class GoalManager
             }
         }
 
-        // Display succesful load message
-        Console.WriteLine("Goals loaded successfully! Press Enter to continue...");
+        Console.WriteLine("Goals and score loaded successfully! Press Enter to continue...");
         Console.ReadLine();
     }
 }
