@@ -14,6 +14,7 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
+    // Record Event of Checklost Goal with its separate format and completed symbol and bonus and scores
     public override void RecordEvent(ref int score)
     {
         if (_completed < _target)

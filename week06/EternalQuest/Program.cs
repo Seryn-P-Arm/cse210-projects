@@ -8,6 +8,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        // Run start and the rest of the program in GoalManager
         GoalManager manager = new GoalManager();
         manager.Start();
     }

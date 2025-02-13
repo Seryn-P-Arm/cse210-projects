@@ -12,6 +12,8 @@ public class GoalManager
 
     public void Start()
     {
+        // Automatically load goals from file
+        // Menu
         LoadGoals();
         while (true)
         {
@@ -39,6 +41,7 @@ public class GoalManager
         }
     }
 
+    // Create a goal
     private void CreateGoal()
     {
         Console.Clear();
@@ -69,6 +72,7 @@ public class GoalManager
         Console.ReadLine();
     }
 
+    // Record event to complete goal
     private void RecordEvent()
     {
         Console.Clear();
@@ -86,6 +90,7 @@ public class GoalManager
         Console.ReadLine();
     }
 
+    // List of created goals and saved goals from loaded file
     private void ListGoals(bool pause = true)
     {
         Console.Clear();
@@ -94,6 +99,7 @@ public class GoalManager
         if (pause) { Console.WriteLine("\nPress Enter to return to the menu..."); Console.ReadLine(); }
     }
 
+    // Save goals to file
     private void SaveGoals()
     {
         using (StreamWriter file = new StreamWriter("goals.txt"))
@@ -105,6 +111,7 @@ public class GoalManager
         Console.ReadLine();
     }
 
+    // Load goals from file
     private void LoadGoals()
     {
          if (!File.Exists("goals.txt")) return;
@@ -121,6 +128,7 @@ public class GoalManager
             string description = parts[2];
             int points = int.Parse(parts[3]);
 
+            // Switch between cases of goal types
             switch (type)
             {
                 case "Simple":
@@ -143,6 +151,7 @@ public class GoalManager
             }
         }
 
+        // Display succesful load message
         Console.WriteLine("Goals loaded successfully! Press Enter to continue...");
         Console.ReadLine();
     }

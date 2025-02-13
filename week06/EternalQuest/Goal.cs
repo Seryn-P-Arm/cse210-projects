@@ -18,6 +18,7 @@ public abstract class Goal
         _isCompleted = false;
     }
 
+    // Public getter and setter funcitons and saving format function
     public string GetName() => _name;
     public int GetPoints() => _points;
     public abstract void RecordEvent(ref int score);
